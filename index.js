@@ -12,15 +12,31 @@ const utils = require("./utils")
 const authroutes = require("./routes/auth");
 
 const router = express.Router()
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
 app.use(bodyParser.urlencoded({extended : false}))
+app.use(bodyParser.json())
 
 utils.dbConnection.sync().then(() =>{
     console.log("Synced Db.")
 }).catch((err)=>{
     console.log("Failed to sync db : " + err.message)
 });
+
+app.use((req,res,next) => {
+    const data = utils.token.verifyToken(req);
+    if(data) {
+        if(req.url === "api/auth/JWTVerify"){
+            return res.status(200).send({status : "Success",data : data});
+        }
+        else{
+            res.locals.role = data.role;
+            res.locals.id = data.id;
+            next()
+        }
+    }
+})
+
 
 app.use('/api/auth',authroutes);
 
@@ -40,7 +56,3 @@ app.use('/api/scholar',(req,res,next) =>{
 });
 
 app.listen(8000, ()=> console.log("server running on http://localhost:8000/"))
-
-
-
-    

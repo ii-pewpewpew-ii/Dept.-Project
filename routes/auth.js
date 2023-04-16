@@ -10,7 +10,7 @@ router.post(
     auth.login
 );
 
-router.get(
+router.post(
     "/admin",
     (req,res,next) =>{
         res.locals.role = "Admin",
@@ -18,5 +18,31 @@ router.get(
     },
     auth.login
 );
+
+router.post(
+    "/forgot-password",
+    auth.forgotPassword
+    );
+router.post(
+    "/set-password/:userId/:linkCode",
+    (req,res,next) =>{
+        req.data.userId = req.params.userId;
+        req.data.linkCode = req.params.linkCode;
+        next();
+    },
+    auth.setPassword
+    );
+
+router.post(
+    "/create-scholar",
+    auth.ScholarSignup
+);
+
+router.post(
+    "/admin-signup",
+    auth.AdminSignup
+);
+
+
 
 module.exports = router

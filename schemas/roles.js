@@ -16,7 +16,7 @@ const Admin = sequelize.define("dist_admin_role", {
     },
     userid: {
         primaryKey: true,
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true
     }
@@ -37,7 +37,7 @@ const Scholar = sequelize.define("dist_scholar_role", {
     },
     userid: {
         primaryKey: true,
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true
     },
@@ -50,4 +50,33 @@ const Scholar = sequelize.define("dist_scholar_role", {
     freezeTableName: true
 });
 
-module.exports = { Admin, Scholar};
+
+const Verification=sequelize.define("verification",{
+    verifyId:{
+      allowNull:false,
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    linkCode:{
+      allowNull:false,
+      type:Sequelize.TEXT,
+      validate:{notNull:true,notEmpty: true }//wont allow null
+    },
+    emailid:{
+      type:Sequelize.TEXT,
+      allowNull:false,
+      unique:true,
+      validate:{isEmail:true,notNull:true,notEmpty: true}
+    },
+    expireTime:{
+      allowNull:false,
+      type:Sequelize.TEXT,
+      validate:{notNull:true,notEmpty: true }
+    }
+  },
+    {
+    freezeTableName: true
+    })
+
+module.exports = { Admin, Scholar, Verification};

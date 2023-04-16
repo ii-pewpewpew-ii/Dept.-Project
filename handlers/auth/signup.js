@@ -2,7 +2,7 @@ const { Admin, Scholar,PersonalDetails } = require("../../schemas")
 const bcrypt = require("bcrypt");
 const saltRounds = 10
 //const {tranporter} = require("../../config"); Create index.js file in config/
-const researchScholarPersonal = require("../../schemas/researchScholarPersonal");
+const {researchScholarPersonal} = require("../../schemas");
 const { transporter } = require("../../config/config.js");
 
 /*

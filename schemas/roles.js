@@ -1,8 +1,6 @@
 
 const Sequelize = require('sequelize')
-
-const utils = require("../utils")
-const sequelize = utils.dbConnection
+const sequelize = require("../utils/dbconnection")
 const Admin = sequelize.define("dist_admin_role", {
     emailid: {
         type: Sequelize.TEXT,

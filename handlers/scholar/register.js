@@ -1,23 +1,19 @@
-const {
-    ResearchDetails,
-    PersonalDetails,
-    ConferencePaper,
-    JournalPaper,
-    researchScholarResearch
-} = require("../../schemas");
 
 const {
     parseConferences,
     parseJournals,
-    parseWorkshops
+    parseWorkshops,
+    registerResearch
 } = require("../../utils");
 const { parseSeminars } = require("../../utils/parsefiles");
 
 const registerScholar = async (req, res) => {
+    const parseFiles = {}
     try {
-        researchDetails = new researchScholarResearch(req)
+        
+        if(req.files){
         const files = req.files;
-        const parseFiles = {}
+        
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             const fieldName = file.fieldName;
@@ -26,19 +22,24 @@ const registerScholar = async (req, res) => {
             }
             parseFiles[fieldName].push(file);
         }
-        if (parseFiles["conferences"])
+        }
+        await registerResearch(req);
+        if (parseFiles && parseFiles["conferences"])
             await parseConferences(req, parseFiles["conferences"]);
-        if (parseFiles["journals"])
+        if (parseFiles && parseFiles["journals"])
             await parseJournals(req, parseFiles["journals"]);
-        if (parseFiles["seminars"])
+        if (parseFiles && parseFiles["seminars"])
             await parseSeminars(req, parseFiles["seminars"]);
-        if (parseFiles["workshops"])
+        if (parseFiles && parseFiles["workshops"])
             await parseWorkshops(req, parseFiles["workshops"])
 
         return res.status(200).send({ message: "Details Registered Successfully" })
+    
     }
     catch (err) {
+        console.error(err.message);
         return res.status(500).send({ message: "Server-Error" });
     }
 
 }
+module.exports = {registerScholar}

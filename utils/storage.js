@@ -4,16 +4,16 @@ const storage = multer.diskStorage({
     destination : function(req,file,cb){
         switch(file.fieldname){
         case "journals":
-            cb(null,"api/filestorage/journals")
+            cb(null,"filestorage/journals")
             break
         case "conferences":
-            cb(null,"api/filestorage/conferences")
+            cb(null,"filestorage/conferences")
             break
         case "seminars":
-            cb(null,"api/filestorage/seminars")
+            cb(null,"filestorage/seminars")
             break
-        case "researchpublications":
-            cb(null,"api/filestorage/seminars")
+        case "workshops":
+            cb(null,"filestorage/workshops")
             break
 
         // case "placement":
@@ -23,8 +23,8 @@ const storage = multer.diskStorage({
             cb(new Error("Invalid Fieldname"))
     }},
     filename : function(req,file,cb){
-        cb(null,`${file.fieldname}-${Date.now()}.pdf`)
+        cb(null,`${req.body.register_no}-${file.fieldname}-${Date.now()}.pdf`)
     }
 })
 
-module.exports = storage
+module.exports ={ storage}

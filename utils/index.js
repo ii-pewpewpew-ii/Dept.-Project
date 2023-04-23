@@ -6,14 +6,14 @@ const {registerResearch} = require("./registerResearch");
 const {fieldsConfiguration} = require("./fields"); 
 const {upload} = require("./multerInstance");
 module.exports = {
-    dbConnection,
-    token,
-    sendMail,
     parseConferences,
     parseJournals,
     parseWorkshops,
     parseSeminars,
     registerResearch,
+    dbConnection,
+    token,
+    sendMail,
     fieldsConfiguration,
     upload
 }

@@ -1,6 +1,6 @@
 class researchScholarResearch{
     constructor (req){
-        this.registration_no = req.body.registration_no
+        this.register_no = req.body.register_no
         this.researcher_name = req.body.first_name + req.body.last_name
         this.research_topic = req.body.research_topic
         this.research_abstract = req.body.research_abstract
@@ -12,7 +12,7 @@ class researchScholarResearch{
 }
 class researchScholarPersonal{
     constructor(req){
-        this.registration_no = req.body.registration_no
+        this.register_no = req.body.register_no
         this.first_name = req.body.first_name
         this.last_name = req.body.last_name
         this.guardian_name = req.body.guardian_name

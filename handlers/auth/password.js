@@ -5,11 +5,12 @@ const {Admin,Verification,Scholar} = require("../../schemas/roles");
 const { token, sendMail } = require("../../utils");
 const saltRounds = 10;
 /*
+
     path : /api/auth/forgot-password
     method : post
     params : email
     response : {}
-
+    
 */
 
 const forgotPassword = async(req,res) => {
@@ -84,10 +85,13 @@ const forgotPassword = async(req,res) => {
 }
 
 /*
+
+
     PATH : /api/auth/set-password 
     POST : userId , linkCode 
     RESPONSE : {message:Success}
                {message:Failure}
+
 */
 
 const setPassword = async(req,res) => {

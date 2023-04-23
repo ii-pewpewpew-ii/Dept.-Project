@@ -8,31 +8,22 @@ const {
 const { parseSeminars } = require("../../utils/parsefiles");
 
 const registerScholar = async (req, res) => {
-    const parseFiles = {}
     try {
-        
-        if(req.files){
+        //console.log(typeof req.files)
         const files = req.files;
-        
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const fieldName = file.fieldName;
-            if (!parseFiles[fieldName]) {
-                parseFiles[fieldName] = []
-            }
-            parseFiles[fieldName].push(file);
-        }
-        }
-        await registerResearch(req);
-        if (parseFiles && parseFiles["conferences"])
-            await parseConferences(req, parseFiles["conferences"]);
-        if (parseFiles && parseFiles["journals"])
-            await parseJournals(req, parseFiles["journals"]);
-        if (parseFiles && parseFiles["seminars"])
-            await parseSeminars(req, parseFiles["seminars"]);
-        if (parseFiles && parseFiles["workshops"])
-            await parseWorkshops(req, parseFiles["workshops"])
 
+        console.log(files)
+        await registerResearch(req);
+        if (files && files["conferences"])
+            await parseConferences(req, files["conferences"]);
+        if (files && files["journals"])
+            await parseJournals(req, files["journals"]);
+        if (files && files["seminars"])
+            await parseSeminars(req, files["seminars"]);
+        if (files && files["workshops"])
+        {
+            await parseWorkshops(req, files["workshops"])
+}
         return res.status(200).send({ message: "Details Registered Successfully" })
     
     }

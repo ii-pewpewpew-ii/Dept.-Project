@@ -2,7 +2,9 @@ const {
     ResearchDetails,
     PersonalDetails,
     ConferencePaper,
-    JournalPaper
+    JournalPaper,
+    Workshops,
+    Seminars
 } = require("./research");
 
 const {
@@ -16,6 +18,8 @@ const {
 } = require("./roles");
 
 module.exports = {
+    Workshops,
+    Seminars,
     PersonalDetails,
     Admin,
     Scholar,

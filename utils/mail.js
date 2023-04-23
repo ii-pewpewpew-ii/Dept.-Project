@@ -8,7 +8,7 @@ const sendMail = async(html,subject,to)=>{
     };
     return new Promise((resolve,reject)=>{
         transporter.sendMail(mailOptions,async(err,info)=>{
-            if (error) reject();
+            if (err) reject();
             resolve();
         })
     });

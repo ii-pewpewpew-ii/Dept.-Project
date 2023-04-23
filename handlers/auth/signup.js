@@ -73,7 +73,7 @@ const ScholarSignup = async (req, res) => {
             return res.status(500).send({ message: "Email already Exists" });
         }
         console.log()
-        const roll_no = scholarDetails.registration_no;
+        const roll_no = scholarDetails.register_no;
         const password = roll_no + "first";
         bcrypt.genSalt(saltRounds, (err,salt) => {
 
@@ -106,7 +106,7 @@ const ScholarSignup = async (req, res) => {
                             password: hash
                         })
                         const personalDetails = PersonalDetails.create({
-                            registration_no : scholarDetails.registration_no,
+                            register_no : scholarDetails.register_no,
                             first_name : scholarDetails.first_name,
                             last_name : scholarDetails.last_name,
                             guardian_name : scholarDetails.guardian_name,

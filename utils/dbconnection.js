@@ -7,16 +7,3 @@ const sequelize = new Sequelize(dbConfig.database,dbConfig.user,dbConfig.passwor
     });
 
 module.exports = sequelize;
-// (async () => {
-// try {
-//     await sequelize.authenticate()
-//     console.log("Connection has been established")
-// }catch(error){
-//     console.error("unable to connect",error)
-// }})()
-
-
-// sequelize.sync()
-// Departments.create({
-//     dept_id : 1
-// });

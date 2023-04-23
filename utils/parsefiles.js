@@ -84,24 +84,44 @@ const parseSeminars = async (req, fileList) => {
 }
 
 const parseWorkshops = async (req, fileList) => {
+    console.log(fileList)
+    
     const register_no = req.body.register_no;
     const workshop_names = req.body.workshop_names;
     const workshop_titles = req.body.workshop_titles;
     const workshop_organisers = req.body.workshop_organisers;
     const workshop_locations = req.body.workshop_locations;
     const types = req.body.workshop_types;
-    const workshop_dates = req.body.workshop_dates;
-
+    const period_to = req.body.period_to;
+    const period_from = req.body.period_from;
+    console.log(fileList.length)
+    if (fileList.length > 1){
     for (let i = 0; i < fileList.length; i++) {
         await Workshops.create({
             workshop_title: workshop_titles[i],
             workshop_organiser: workshop_organisers[i],
-            workshop_date: workshop_dates[i],
             register_no: register_no,
             workshop_name: workshop_names[i],
-            workshop_locations: workshop_locations[i],
+            location: workshop_locations[i],
             nationality: types[i],
-            document_path: fileList[i].path
+            document_path: fileList[i].path,
+            period_to : period_to[i],
+            workshop_location : workshop_locations[i],
+            period_from : period_from[i]
+        })
+    }}
+    else{
+        await Workshops.create({
+            workshop_title: workshop_titles,
+            workshop_organiser: workshop_organisers,
+            register_no: register_no,
+            workshop_name: workshop_names,
+            workshop_locations: workshop_locations,
+            nationality: types,
+            document_path: fileList[0].path,
+            period_to : period_to,
+            location: workshop_locations,
+            period_from : period_from
         })
     }
 }

@@ -2,7 +2,7 @@ const {ResearchDetails,researchScholarResearch} = require("../schemas")
 const registerResearch = async (req) => {
     researchDetails = new researchScholarResearch(req);
     await ResearchDetails.create({
-        registration_no : researchDetails.registration_no,
+        register_no : researchDetails.register_no,
         researcher_name : researchDetails.researcher_name,
         research_topic : researchDetails.research_topic,
         research_abstract: researchDetails.research_abstract,

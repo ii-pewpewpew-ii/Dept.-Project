@@ -2,7 +2,7 @@ const Sequelize = require("sequelize")
 const sequelize = require("../utils/dbconnection")
 
 const ResearchDetails = sequelize.define("DIST_Research_Scholar_Research", {
-    registration_no: {
+    register_no: {
         allowNull: false,
         type: Sequelize.TEXT,
         primaryKey: true,
@@ -36,10 +36,13 @@ const ResearchDetails = sequelize.define("DIST_Research_Scholar_Research", {
         allowNull: false,
         type: Sequelize.TEXT
     }
-})
+},//{
+   // freezeTableName : true
+//}
+)
 
 const PersonalDetails = sequelize.define("DIST_Research_Scholar_Personal", {
-    registration_no: {
+    register_no: {
         primaryKey: true,
         allowNull: false,
         unique: true,
@@ -91,7 +94,10 @@ const PersonalDetails = sequelize.define("DIST_Research_Scholar_Personal", {
         type: Sequelize.TEXT,
         allowNull: false
     }
-});
+},//{
+    //freezeTableName : true
+//}
+);
 const JournalPaper = sequelize.define("DIST_Journal_Papers", {
     paperid: {
         type: Sequelize.INTEGER,
@@ -152,7 +158,10 @@ const JournalPaper = sequelize.define("DIST_Journal_Papers", {
         type: Sequelize.TEXT,
         allowNull: false
     }
-});
+},//{
+   // freezeTableName : true
+//}
+);
 
 
 const ConferencePaper = sequelize.define("DIST_Conference_Papers", {
@@ -212,7 +221,10 @@ const ConferencePaper = sequelize.define("DIST_Conference_Papers", {
         allowNull: false
     },
 
-});
+},//{
+   //freezeTableName : true
+//}
+);
 
 const Seminars = sequelize.define("DIST_Seminars", {
     seminar_id: {
@@ -249,7 +261,10 @@ const Seminars = sequelize.define("DIST_Seminars", {
         allowNull: false
     }
 
-});
+},//{
+   // freezeTableName : true
+//}
+);
 
 const Workshops = sequelize.define("DIST_workshops", {
     workshop_id: {
@@ -278,9 +293,13 @@ const Workshops = sequelize.define("DIST_workshops", {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    workshop_date: {
+    period_from: {
         type: Sequelize.DATE,
         allowNull: false
+    },
+    period_to : {
+        type : Sequelize.DATE,
+        allowNull : false,
     },
     register_no: {
         type: Sequelize.TEXT,
@@ -288,7 +307,10 @@ const Workshops = sequelize.define("DIST_workshops", {
     }
 
 
-})
+},//{
+   // freezeTableName : true
+//}
+)
 
 module.exports = {
     ResearchDetails,

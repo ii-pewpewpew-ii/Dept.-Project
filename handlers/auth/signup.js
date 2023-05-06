@@ -45,7 +45,7 @@ const AdminSignup = async (req, res) => {
                                 emailid: mail,
                                 password: hash
                             })
-                            return res.status(200).send({ message: "Success" });
+                            return res.status(200).send({ message: "Success", });
                         }
                     }
                 );

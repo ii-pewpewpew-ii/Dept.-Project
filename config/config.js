@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 })
 
 const JWTDetails = {
-    secret : process.env.JWT_SECRET_KEY,
+    secret : "process.env.JWT_SECRET_KEY",
     jwtExpiration : 3600,
 };
 

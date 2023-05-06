@@ -5,5 +5,4 @@ const sequelize = new Sequelize(dbConfig.database,dbConfig.user,dbConfig.passwor
         host : dbConfig.host,
         dialect : dbConfig.dialect
     });
-
 module.exports = sequelize;

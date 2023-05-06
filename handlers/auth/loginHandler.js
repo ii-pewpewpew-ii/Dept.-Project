@@ -7,35 +7,35 @@ const { Admin, Scholar } = require("../../schemas/roles")
 const { JWTDetails } = require("../../config/config")
 
 const sequelize = utils.dbConnection
-//routes : dist_research_scholar/auth/
+//routes : dist_research_scholar/auth/admin/
 
 const loginHandler = async (req, res) => {
-    await sequelize.sync()
-
-    const role = res.locals.role
+    const role = req.locals.role
     const mailId = req.body.emailid
     const password = req.body.password
     var Role;
+    console.log(role);
     if (role === "Admin") {
         Role = Admin
     } else {
         Role = Scholar
     }
     try {
-        if (mail && password) {
+        if (mailId && password) {
             let data = await Role.findOne({
                 where: {
                     emailid: mailId
                 }
             })
             if (data === null) {
-
+                
                 return res.status(401).send({ message: "Mail ID is not registered yet" })
 
             }
 
             bcrypt.compare(password, data.password, function (err, result) {
                 if (err) {
+                    console.error(err);
                     return res.status(401).send({ message: "Server Error" })
                 }
                 else {
@@ -45,6 +45,8 @@ const loginHandler = async (req, res) => {
                         var token = jwt.sign({ id ,role}, JWTDetails.secret, {
                             expiresIn: JWTDetails.jwtExpiration
                         });
+                        // testing set JWT;
+                        res.set("x-access-token",token);
                         return res.status(200).json({ message: "Login Success", accessToken: token })
                     }
                     else {
@@ -58,7 +60,9 @@ const loginHandler = async (req, res) => {
         }
     }
     catch (err) {
+        console.error(err);
         return res.status(500).send({ message: "server error" });
     }
 }
+
 module.exports =  loginHandler 

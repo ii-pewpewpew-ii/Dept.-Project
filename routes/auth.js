@@ -23,6 +23,7 @@ router.post(
     "/forgot-password",
     auth.forgotPassword
     );
+
 router.post(
     "/set-password/:userId/:linkCode",
     (req,res,next) =>{
@@ -32,11 +33,6 @@ router.post(
     },
     auth.setPassword
     );
-
-router.post(
-    "/create-scholar",
-    auth.ScholarSignup
-);
 
 router.post(
     "/admin-signup",

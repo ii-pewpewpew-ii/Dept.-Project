@@ -9,7 +9,7 @@ const scholarroutes = require("./routes/scholar");
 const { verify } = require('jsonwebtoken');
 const { verifyToken } = require('./utils/token');
 const router = express.Router()
-
+const adminroutes = require("./routes/admin");
 const unauthroutes = ["/api/auth/admin", "/api/auth/scholar", "/api/auth/admin-signup"]
 
 
@@ -38,7 +38,6 @@ app.use((req, res, next) => {
 
     req.locals = {}
     const token = req.headers.authorization;
-
     if(!token || token === "Bearer no_token"){
         return res.status(400).send({message : "token required"});
     }
@@ -60,11 +59,10 @@ app.use((req, res, next) => {
 
 
 app.use('/api/admin', (req, res, next) => {
-    if (res.locals.role == "Admin") next()
-    return res.status(401).send({ status: "failure", message: "Admin-only Routes" })
-}, (req, res) => {
-    return res.status(200).send({ message: "Admin routes to be implemented" })
-});
+    // if (res.locals.role == "Admin") next()
+    // return res.status(401).send({ status: "failure", message: "Admin-only Routes" })
+    next();
+}, adminroutes);    
 
 app.use("/api/scholar", scholarroutes);
 

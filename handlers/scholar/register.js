@@ -1,4 +1,6 @@
-
+const {
+    Scholar
+} = require("../../schemas/roles");
 const {
     parseConferences,
     parseJournals,
@@ -23,9 +25,20 @@ const registerScholar = async (req, res) => {
         if (files && files["workshops"])
         {
             await parseWorkshops(req, files["workshops"])
-}
+        }
+        const emailid = req.body.emailid;
+        await Scholar.update({
+            verified : true
+        },
+            {
+            where: {
+                emailid : emailid
+            }
+        })
+        
         return res.status(200).send({ message: "Details Registered Successfully" })
     
+        
     }
     catch (err) {
         console.error(err.message);

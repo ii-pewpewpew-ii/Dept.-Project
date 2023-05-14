@@ -1,7 +1,7 @@
 class researchScholarResearch{
     constructor (req){
         this.register_no = req.body.register_no
-        this.researcher_name = req.body.first_name + req.body.last_name
+        this.researcher_name = req.body.researcher_name
         this.research_topic = req.body.research_topic
         this.research_abstract = req.body.research_abstract
         this.research_supervisor_name = req.body.research_supervisor_name

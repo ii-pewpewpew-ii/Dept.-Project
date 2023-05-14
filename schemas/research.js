@@ -256,7 +256,7 @@ const Seminars = sequelize.define("DIST_Seminars", {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    nationality: {
+    type: {
         type: Sequelize.TEXT,
         allowNull: false
     }

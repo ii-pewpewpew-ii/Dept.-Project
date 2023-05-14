@@ -16,6 +16,7 @@ const retrieveUsingDates = async (req, res) => {
         const document_category = req.query.document_category;
         const register_no = req.query.register_no;
         var document_model;
+        
         switch (document_category) {
             case "workshops":
                 document_model = Workshops;
@@ -32,12 +33,11 @@ const retrieveUsingDates = async (req, res) => {
             default:
                 return res.status(400).json({ message: "Invalid document category" });
         }
-
         const data = await document_model.findAll({
             where: {
                 register_no: register_no,
-                [Op.gte] : from,
-                [Op.lte] : to
+                // [Op.gte] : from,
+                // [Op.lte] : to
             }
         });
 
@@ -50,8 +50,8 @@ const retrieveUsingDates = async (req, res) => {
 }
 
 const retrieveUsingType = async (req,res) => {
-    const document_category = req.query.document_category
-    const register_no = req.query.register_no;
+    const document_category = req.body.document_category;
+    const register_no = req.body.register_no;
     var document_model;
     switch (document_category) {
         case "workshops":
@@ -76,14 +76,13 @@ const retrieveUsingType = async (req,res) => {
     })
     return res.status(200).json(data);
 
-
 }
 
 const retrieveUsingScope = async(req,res) => {
     const register_no = req.body.register_no;
     const document_category = req.body.document_category;
     const scope = req.body.scope;
-    var document_model
+    var document_model;
     switch (document_category) {
         case "workshops":
             document_model = Workshops;
@@ -105,7 +104,7 @@ const retrieveUsingScope = async(req,res) => {
             register_no : register_no,
             nationality : scope,
         }
-    })
+    });
     if(!data)
         return res.status(200).json({message : "No Records to show"});
     return res.status(200).json(data);

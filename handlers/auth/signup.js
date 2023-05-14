@@ -12,7 +12,7 @@ const { transporter } = require("../../config/config.js");
 */
 
 const AdminSignup = async (req, res) => {
-    const mail = req.body.mail;
+    const mail = req.body.emailid;
     const password = req.body.password;
     console.log(req.body)
     if (mail && password) {
@@ -62,7 +62,9 @@ const AdminSignup = async (req, res) => {
 }
 
 const ScholarSignup = async (req, res) => {
+    console.log("hello");
     let scholarDetails = new researchScholarPersonal(req);
+    console.log(scholarDetails);
     if (scholarDetails.email_id) {
         data = await Scholar.findOne({
             where: {
@@ -72,7 +74,6 @@ const ScholarSignup = async (req, res) => {
         if (data) {
             return res.status(500).send({ message: "Email already Exists" });
         }
-        console.log()
         const roll_no = scholarDetails.register_no;
         const password = roll_no + "first";
         bcrypt.genSalt(saltRounds, (err,salt) => {
@@ -92,15 +93,15 @@ const ScholarSignup = async (req, res) => {
                             subject : "Login Credentials",
                             text : `Use these credentials to login to dist portal\nusername : ${scholarDetails.email_id}\npassword : ${password}`
                         };
-                        transporter.sendMail(transportData,(error,info)=>{
-                            if(error){
-                                console.error(error);
-                                return res.status(500).send({message : "Mail couldn't be send"});
+                        // transporter.sendMail(transportData,(error,info)=>{
+                        //     if(error){
+                        //         console.error(error);
+                        //         return res.status(500).send({message : "Mail couldn't be send"});
                                 
-                            }else{
-                                console.log("Email Sent ");
-                            }
-                        })
+                        //     }else{
+                        //         console.log("Email Sent ");
+                        //     }
+                        // })
                         const data = Scholar.create({
                             emailid: scholarDetails.email_id,
                             password: hash

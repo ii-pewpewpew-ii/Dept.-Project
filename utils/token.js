@@ -1,26 +1,22 @@
 const jwt = require("jsonwebtoken")
 const {JWTDetails} = require("../config/config")
 
-const getToken = (request) => {
-    var token = null;
+// const getToken = (request) => {
+//     var token = null;
 
-    request.headers && request.headers.cookie.split(';').forEach(function(cookie) {
-        var parts = cookie.match(/(.*?)=(.*)$/)
+//     request.headers && request.headers.cookie.split(';').forEach(function(cookie) {
+//         var parts = cookie.match(/(.*?)=(.*)$/)
 
-        if(parts && parts[1] == "accessToken"){
-            token = parts[2]
-        }
-    });
+//         if(parts && parts[1] == "accessToken"){
+//             token = parts[2]
+//         }
+//     });
 
-    return token
-};
+    // return token
+//};
 
 
-const verifyToken = (request) => {
-    const token = getToken(request);
-    
-    //console.log(token)
-
+const verifyToken = (token) => {
     if(!token) return null;
 
     try{

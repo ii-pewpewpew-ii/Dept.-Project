@@ -45,8 +45,15 @@ const loginHandler = async (req, res) => {
                         var token = jwt.sign({ id ,role}, JWTDetails.secret, {
                             expiresIn: JWTDetails.jwtExpiration
                         });
-                        // testing set JWT;
                         res.set("x-access-token",token);
+                        if(role === "Scholar"){
+                            if(data.verified === false){
+                                return res.status(200).json({ message: "Login Success", accessToken: token,verified : "false"});
+                            }
+                            else{
+                                return res.status(200).json({ message: "Login Success", accessToken: token,verified : "true"});
+                            }
+                        }
                         return res.status(200).json({ message: "Login Success", accessToken: token })
                     }
                     else {

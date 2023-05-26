@@ -9,12 +9,30 @@ const {
 const {Op} = require("sequelize");
 
 
+const handleRetrieveRequests = async (req,res) =>{
+    const from_date = req.body.from_date;
+    const to_date = req.body.to_date;
+    const document_category = req.body.document_category;
+    const register_no = req.body.register_no;
+    const scope = req.body.scope;
+    if(from_date && to_date && document_category){
+        res = await retrieveUsingDates(req,res);
+        return res;
+    }
+    else if(document_category && scope){
+        res = await retrieveUsingScope(req,res);
+        return res;
+    }else if(document_category){
+        res = await retrieve
+    }
+}
+
 const retrieveUsingDates = async (req, res) => {
     try {
-        const from = req.query.from_date;
-        const to = req.query.to_date;
-        const document_category = req.query.document_category;
-        const register_no = req.query.register_no;
+        const from = req.body.from_date;
+        const to = req.body.to_date;
+        const document_category = req.body.document_category;
+        const register_no = req.body.register_no;
         var document_model;
         
         switch (document_category) {
@@ -36,8 +54,8 @@ const retrieveUsingDates = async (req, res) => {
         const data = await document_model.findAll({
             where: {
                 register_no: register_no,
-                // [Op.gte] : from,
-                // [Op.lte] : to
+                [Op.gte] : from,
+                [Op.lte] : to
             }
         });
 

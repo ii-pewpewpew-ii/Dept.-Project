@@ -4,7 +4,7 @@ const auth = require("../handlers/auth");
 router.post(
     "/scholar",
     (req,res,next) =>{
-        req.locals.role = "Scholar";
+        res.locals.role = "Scholar";
         next()
     },
     auth.login
@@ -13,7 +13,7 @@ router.post(
 router.post(
     "/admin",
     (req,res,next) =>{
-        req.locals.role = "Admin",
+        res.locals.role = "Admin",
         next()
     },
     auth.login

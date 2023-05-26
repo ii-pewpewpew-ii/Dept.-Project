@@ -42,9 +42,11 @@ router.get("/workshops",
     scholar.retrieveUsingType
 );
 
-router.get("/dashboard",
+router.post("/dashboard",
     scholar.fetchDashboard
 );
+
+
 
 router.post("/download",
     (req,res) => {

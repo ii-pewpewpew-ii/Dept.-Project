@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 const JWTDetails = {
     secret : "process.env.JWT_SECRET_KEY",
-    jwtExpiration : 3600,
+    jwtExpiration : 10000,
 };
 
 module.exports ={

@@ -25,7 +25,7 @@ utils.dbConnection.sync().then(() => {
 });
 
 app.use('/api/auth',(req,res,next)=>{
-    req.locals = {},
+    //req.locals = {},
     next();
 }, authroutes,(req,res)=>{
     //eq.locals = {}
@@ -36,7 +36,7 @@ app.use('/api/auth',(req,res,next)=>{
 app.use((req, res, next) => {
 
 
-    req.locals = {}
+    //req.locals = {}
     const token = req.headers.authorization;
     if(!token || token === "Bearer no_token"){
         return res.status(400).send({message : "token required"});
@@ -46,8 +46,8 @@ app.use((req, res, next) => {
 
     if(data){
 
-        req.locals.role = data.role;
-        req.locals.id = data.id;
+        res.locals.role = data.role;
+        res.locals.id = data.id;
         next();
     }
 
@@ -59,9 +59,8 @@ app.use((req, res, next) => {
 
 
 app.use('/api/admin', (req, res, next) => {
-    // if (res.locals.role == "Admin") next()
-    // return res.status(401).send({ status: "failure", message: "Admin-only Routes" })
-    next();
+    if (res.locals.role == "Admin"){next()}
+    return res.status(401).send({ status: "failure", message: "Admin-only Routes" })
 }, adminroutes);    
 
 app.use("/api/scholar", scholarroutes);

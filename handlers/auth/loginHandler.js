@@ -10,7 +10,7 @@ const sequelize = utils.dbConnection
 //routes : dist_research_scholar/auth/admin/
 
 const loginHandler = async (req, res) => {
-    const role = req.locals.role
+    const role = res.locals.role
     const mailId = req.body.emailid
     const password = req.body.password
     var Role;

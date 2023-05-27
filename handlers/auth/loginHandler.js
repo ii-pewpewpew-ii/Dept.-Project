@@ -13,6 +13,7 @@ const loginHandler = async (req, res) => {
     const role = res.locals.role
     const mailId = req.body.emailid
     const password = req.body.password
+    console.log(mailId);
     var Role;
     console.log(role);
     if (role === "Admin") {

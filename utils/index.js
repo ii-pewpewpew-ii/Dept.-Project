@@ -5,12 +5,16 @@ const {parseConferences,parseJournals, parseWorkshops,parseSeminars} = require("
 const {registerResearch} = require("./registerResearch");
 const {fieldsConfiguration} = require("./fields"); 
 const {upload} = require("./multerInstance");
+const {handleDocumentRetrieveRequests,handleRetrieveScholar,retrieveUsingRegisterNumber}= require("./retrieveQueries");
 module.exports = {
+    handleDocumentRetrieveRequests,
+    handleRetrieveScholar,
     parseConferences,
     parseJournals,
     parseWorkshops,
     parseSeminars,
     registerResearch,
+    retrieveUsingRegisterNumber,
     dbConnection,
     token,
     sendMail,

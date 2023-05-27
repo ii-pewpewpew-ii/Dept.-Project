@@ -134,7 +134,7 @@ const parseSeminars = async (req, fileList) => {
 }
 
 const parseWorkshops = async (req, fileList) => {
-    console.log(fileList)
+   try{
 
     const register_no = req.body.register_no;
     const workshop_names = req.body.workshop_names;
@@ -144,7 +144,6 @@ const parseWorkshops = async (req, fileList) => {
     const types = req.body.workshop_types;
     const period_to = req.body.period_to;
     const period_from = req.body.period_from;
-    console.log(fileList.length)
     if (fileList.length > 1) {
         for (let i = 0; i < fileList.length; i++) {
             await Workshops.create({
@@ -162,6 +161,7 @@ const parseWorkshops = async (req, fileList) => {
         }
     }
     else {
+        console.log(period_to);
         await Workshops.create({
             workshop_title: workshop_titles,
             workshop_organiser: workshop_organisers,
@@ -175,6 +175,10 @@ const parseWorkshops = async (req, fileList) => {
             period_from: new Date(period_from)
         })
     }
+}
+catch(err){
+    console.log(err);
+}
 }
 
 module.exports = {

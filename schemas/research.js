@@ -35,6 +35,10 @@ const ResearchDetails = sequelize.define("DIST_Research_Scholar_Research", {
     research_supervisor_email: {
         allowNull: false,
         type: Sequelize.TEXT
+    },
+    supervisor_id : {
+        allowNull : false,
+        type : Sequelize.TEXT
     }
 },//{
    // freezeTableName : true
@@ -94,9 +98,9 @@ const PersonalDetails = sequelize.define("DIST_Research_Scholar_Personal", {
         type: Sequelize.TEXT,
         allowNull: false
     }
-},//{
-    //freezeTableName : true
-//}
+},{
+    freezeTableName : true
+}
 );
 const JournalPaper = sequelize.define("DIST_Journal_Papers", {
     paperid: {
@@ -158,9 +162,9 @@ const JournalPaper = sequelize.define("DIST_Journal_Papers", {
         type: Sequelize.TEXT,
         allowNull: false
     }
-},//{
-   // freezeTableName : true
-//}
+},{
+    freezeTableName : true
+}
 );
 
 
@@ -221,9 +225,9 @@ const ConferencePaper = sequelize.define("DIST_Conference_Papers", {
         allowNull: false
     },
 
-},//{
-   //freezeTableName : true
-//}
+},{
+   freezeTableName : true
+}
 );
 
 const Seminars = sequelize.define("DIST_Seminars", {
@@ -261,9 +265,10 @@ const Seminars = sequelize.define("DIST_Seminars", {
         allowNull: false
     }
 
-},//{
-   // freezeTableName : true
-//}
+},
+{
+   freezeTableName : true
+}
 );
 
 const Workshops = sequelize.define("DIST_workshops", {
@@ -307,10 +312,17 @@ const Workshops = sequelize.define("DIST_workshops", {
     }
 
 
-},//{
-   // freezeTableName : true
-//}
+},
+{
+   freezeTableName : true
+}
 )
+PersonalDetails.hasOne(ResearchDetails, {
+    foreignKey: 'register_no'
+  });
+  ResearchDetails.belongsTo(PersonalDetails, {
+    foreignKey: 'register_no'
+  });
 
 module.exports = {
     ResearchDetails,

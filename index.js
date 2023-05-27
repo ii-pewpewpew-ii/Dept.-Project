@@ -58,11 +58,12 @@ app.use((req, res, next) => {
 
 
 
-app.use('/api/admin', (req, res, next) => {
-    if (res.locals.role == "Admin"){next()}
-    return res.status(401).send({ status: "failure", message: "Admin-only Routes" })
-}, adminroutes);    
+app.use('/api/admin',  adminroutes);    
 
+// (req, res, next) => {
+//     if (res.locals.role != "Admin"){next()}
+//     return res.status(401).send({ status: "failure", message: "Admin-only Routes" })
+// }
 app.use("/api/scholar", scholarroutes);
 
 app.listen(8000, () => console.log("server running on http://localhost:8000/"))

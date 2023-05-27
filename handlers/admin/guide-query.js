@@ -2,11 +2,11 @@ const { ResearchDetails, PersonalDetails } = require("../../schemas");
 
 const fetchGuideData = async (req, res) => {
     try {
-        const queryEmail = req.body.email_id;
+        const supervisor_id = req.body.supervisor_id;
         data = await PersonalDetails.findAll({
             include: [{
                 model: ResearchDetails,
-                where: { reseach_supervisor_email: queryEmail }
+                where: { supervisor_id: supervisor_id }
             }]
         })
         return res.status(200).json(data);

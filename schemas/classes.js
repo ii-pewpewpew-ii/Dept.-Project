@@ -8,6 +8,7 @@ class researchScholarResearch{
         this.research_supervisor_address = req.body.research_supervisor_address
         this.research_supervisor_phone_no = req.body.research_supervisor_phone_no
         this.research_supervisor_email = req.body.research_supervisor_email
+        this.supervisor_id = req.body.supervisor_id;
     }
 }
 class researchScholarPersonal{

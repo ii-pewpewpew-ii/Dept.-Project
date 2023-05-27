@@ -30,7 +30,7 @@ app.use('/api/auth',(req,res,next)=>{
 }, authroutes,(req,res)=>{
     //eq.locals = {}
     return res.send(req.res);
-})
+});
 
 
 app.use((req, res, next) => {
